@@ -36,7 +36,7 @@ function newAdvice(e){
     var name = document.createElement("input");
     name.className = "nameofinput";
     newpage1.appendChild(name);
-    var save = document.createElement("button")
+    var save = document.createElement("button");
     save.className = "gosaveadvice";
     save.innerHTML = "Save Advice";
     newpage1.appendChild(save);
