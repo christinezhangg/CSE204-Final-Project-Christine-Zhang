@@ -1,1 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <link href = "style.css" type="text/css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name = "description" content = "A website that randomly generates advice for its users.">
+        <title>CSE 204A - Assignment 10 Final Project</title>
+        <!-- Show off what I've learned from this class by using HTML/CSS/JS/API calls to create a fully functioning website. -->
+    </head>
+    <body>
+        <div id = "entirescreen">
+            <div id = "homepage">
+                <div class = "header">
+                    <h2>Christine's Crazy Advice</h2>
+                </div>
+                <div class = "AOTD">
+                    <strong>Advice of the Day!</strong>
+                    <!-- Somehow call your API to show some random advice of the day -->
+                    <div class = "quote">
+                        <!-- Empty div to insert AOTD into??? I hope that works -->
+                    </div>
+                </div>
+                <div class = "buttons">
+                    <button id = "NewAdviceButton">Get New Advice</button>
+                    <button id = "ViewSavedAdviceButton" onclick="SavedAdvice()">View Your Saved Advice</button>
+                    <button id = "AbouttheCreatorButton" onclick="About()">About This Platform</button>
+                </div>
+            </div>
+            <div id = "NewAdvicePage">
 
+            </div>
+        </div>
+        <script src = "script.js"></script>
+    </body>
+</html>
