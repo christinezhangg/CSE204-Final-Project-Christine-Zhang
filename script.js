@@ -1,7 +1,7 @@
 document.getElementById("ViewSavedAdviceButton").addEventListener("click", savedAdvice);
 document.getElementById("NewAdviceButton").addEventListener("click", newAdvice);
 document.getElementById("AbouttheCreatorButton").addEventListener("click", goAbout);
-// document.getElementById("veryhomey").addEventListener("click", goHome);
+document.getElementById("veryhomey").addEventListener("click", goHome);
 var url = "https://api.adviceslip.com/advice";
 var advice = [];
 
@@ -10,7 +10,7 @@ function getAdvice(i) {
     xhttp1.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var advice = JSON.parse(this.responseText);
-            getNewAdvice(advice);
+            newAdvice(advice);
         }
     };
     xhttp1.open("GET", url, true);
@@ -25,7 +25,7 @@ function newAdvice(e){
     // all the stuff in this new page
     var NA = document.createElement("button");
     NA.className = "generateNewAdvice";
-    NA.addEventListener("click", getNewAdvice);
+    NA.addEventListener("click", getAdvice);
     NA.innerHTML = "Discover New Advice";
     newpage1.appendChild(NA);
 
@@ -56,11 +56,11 @@ function newAdvice(e){
 }
 
 //this is not working and idk why.
-function goHome(){
+function goHome(e){
     e.preventDefault();
-    // var newpage2 = document.getElementById("HoldsNewAdvice");
-    // newpage2.id = "backhome"
-    // document.getElementById("backhome").removeChild(newpage2);
+    var newpage2 = document.getElementById("HoldsNewAdvice");
+    newpage2.id = "backhome"
+    document.getElementById("backhome").removeChild(newpage2);
     
     document.getElementById("HoldsNewAdvice").style.display = "none";
     document.getElementById("NewAdvicePage").style.display = "none";
@@ -91,7 +91,7 @@ function savedAdvice(e){
 
 }
 
-function goAbout(){
+function goAbout(e){
     e.preventDefault();
     var newpage3 = document.createElement("div");
     newpage3.id = "HoldsAboutStuff";
