@@ -1,7 +1,7 @@
 document.getElementById("ViewSavedAdviceButton").addEventListener("click", savedAdvice);
 document.getElementById("NewAdviceButton").addEventListener("click", newAdvice);
 document.getElementById("AbouttheCreatorButton").addEventListener("click", goAbout);
-document.getElementById("veryhomey").addEventListener("click", goHome);
+//document.getElementById("veryhomey").addEventListener("click", goHome);
 var url = "https://api.adviceslip.com/advice";
 var advice = [];
 
@@ -57,11 +57,13 @@ function newAdvice(e){
 
 //this is not working and idk why.
 function goHome(e){
+    console.log("going home")
     e.preventDefault();
+    /*
     var newpage2 = document.getElementById("HoldsNewAdvice");
     newpage2.id = "backhome"
     document.getElementById("backhome").removeChild(newpage2);
-    
+    */
     document.getElementById("HoldsNewAdvice").style.display = "none";
     document.getElementById("NewAdvicePage").style.display = "none";
     document.getElementById("homepage").style.display = '';
