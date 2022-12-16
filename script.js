@@ -1,124 +1,117 @@
-document.getElementById("ViewSavedAdviceButton").addEventListener("click", savedAdvice);
 document.getElementById("NewAdviceButton").addEventListener("click", newAdvice);
+document.getElementById("ViewSavedAdviceButton").addEventListener("click", savedAdvice);
 document.getElementById("AbouttheCreatorButton").addEventListener("click", goAbout);
+document.getElementById("gobackhome").addEventListener("click", goHome);
+document.getElementById("gobackhomey").addEventListener("click", goHome);
+document.getElementById("gobackhomeyy").addEventListener("click", goHome);
+// document.getElementById("clicktosaveadvice").addEventListener("click", sendAlert);
+var clickToSaveAdviceDiv = document.getElementById("clicktosaveadvice");
+clickToSaveAdviceDiv.addEventListener("click", function(e) {
+    var divId = document.getElementById("generatedAdvice");
+    if (divId.innerText == '') {
+        console.log("inif");
+        alert("Please discover new advice before saving");
+    } 
+    else {
+        console.log("inelse");
+        save();
+        sendAlert();
+    }
+  });
+
 var url = "https://api.adviceslip.com/advice";
-var advice = [];
+var advicee = [];
 
-// function getAdvice(i) {
-//     var xhttp1 = new XMLHttpRequest();
-//     xhttp1.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             var advice = JSON.parse(this.responseText);
-//             newAdvice(advice);
-//         }
-//     };
-//     xhttp1.open("GET", url, true);
-//     xhttp1.send();
-// }
+document.getElementById("NewAdvicePage").style.display = "none";
+document.getElementById("SavedAdvicePage").style.display = "none";
+document.getElementById("AboutPage").style.display = "none";
 
-const API_URL = "https://api.adviceslip.com/advice";
-const quoteP = document.querySelector("h2#quote")
-
-function get(url) {
-    return fetch(url).then(resp => resp.json())
+function getAdvice() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var realadvice = JSON.parse(this.responseText);
+            advices = realadvice.slip.advice;
+            console.log(advices);
+            document.getElementById("generatedAdvice").innerHTML = advices;
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
 }
 
-const API = { get }
+var xhttp1 = new XMLHttpRequest();
+    xhttp1.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var realadvice = JSON.parse(this.responseText);
+            advices = realadvice.slip.advice;
+            console.log(advices);
+            document.getElementById("quote").innerHTML = advices;
 
-function getQuotes() {
-    API.get(API_URL).then(data => addQuote(data['slip']['advice']))
+        }
+    };
+    xhttp1.open("GET", url, true);
+    xhttp1.send();
+
+function save(){
+    console.log("saved");
+    const generatedAdvice = document.getElementById("generatedAdvice");
+    const adviceText = generatedAdvice.textContent;
+    const adviceListItem = document.createElement("li");
+    adviceListItem.textContent = adviceText;
+    adviceListItem.id = "ali";
+    const items = document.getElementById("items");
+    items.appendChild(adviceListItem);
 }
 
-function addQuote(quote){
-    quoteP.innerText = quote;
+function sendAlert(){
+    alert("Your advice has been successfully saved.  View your saved advice to see it!")
 }
 
 function newAdvice(e){
     e.preventDefault();
-    var newpage1 = document.createElement("div");
-    newpage1.id = "HoldsNewAdvice";
-    document.getElementById("NewAdvicePage").appendChild(newpage1);
-    // all the stuff in this new page
-    var NA = document.createElement("button");
-    NA.className = "generateNewAdvice";
-    NA.addEventListener("click", getAdvice);
-    NA.innerHTML = "Discover New Advice";
-    newpage1.appendChild(NA);
+    console.log("in newAdvice");
 
-    var words = document.createElement("p");
-    words.className = "advicearewords";
-    words.innerHTML = "Please Assign Your Advice a Date or Name Before Saving";
-    newpage1.appendChild(words);
-    var name = document.createElement("input");
-    name.className = "nameofinput";
-    newpage1.appendChild(name);
-    var save = document.createElement("button");
-    save.className = "gosaveadvice";
-    save.innerHTML = "Save Advice";
-    newpage1.appendChild(save);
-    var home = document.createElement("button");
-    home.id = "veryhomey";
-    home.innerHTML = "Go Back to Home Page";
-    newpage1.appendChild(home);
-    home.addEventListener("click", goHome);
+    var trial = document.getElementById("DiscoverNewAdviceButton");
+    trial.addEventListener("click", getAdvice);
+    console.log("after trial");
+    // document.getElementById("generatedAdvice").innerHTML = wordshaha;
+    console.log("after innerHTML");
+
 
     document.getElementById("homepage").style.display = "none";
-    document.getElementById("NewAdviceButton").style.display = "none";
-    document.getElementById("AbouttheCreatorButton").style.display = "none";
     document.getElementById("SavedAdvicePage").style.display = "none";
-    document.getElementById("ViewSavedAdviceButton").style.display = "";
     document.getElementById("NewAdvicePage").style.display = "";
-
-}
-
-//this is not working and idk why.
-function goHome(e){
-    console.log("going home")
-    e.preventDefault();
-    /*
-    var newpage2 = document.getElementById("HoldsNewAdvice");
-    newpage2.id = "backhome"
-    document.getElementById("backhome").removeChild(newpage2);
-    */
-    document.getElementById("HoldsNewAdvice").style.display = "none";
-    document.getElementById("NewAdvicePage").style.display = "none";
-    document.getElementById("homepage").style.display = '';
-}
-
-//not exactly sure what to do here.
-function getNewAdvice(){
+    document.getElementById("AboutPage").style.display = "none";
 
 }
 
 function savedAdvice(e){
     e.preventDefault();
-    var newpage2 = document.createElement("div");
-    newpage2.id = "HoldsSavedAdvice";
-    document.getElementById("SavedAdvicePage").appendChild(newpage2);
-    var home = document.createElement("button");
-    home.id = "veryhomey";
-    home.innerHTML = "Go Back to Home Page";
-    newpage2.appendChild(home);
 
     document.getElementById("homepage").style.display = "none";
-    document.getElementById("AbouttheCreatorButton").style.display = "none";
-    document.getElementById("ViewSavedAdviceButton").style.display = "none";
-    document.getElementById("NewAdvicePage").style.display = "none";
-    document.getElementById("NewAdviceButton").style.display = "";
     document.getElementById("SavedAdvicePage").style.display = "";
+    document.getElementById("NewAdvicePage").style.display = "none";
+    document.getElementById("AboutPage").style.display = "none";
 
 }
 
 function goAbout(e){
     e.preventDefault();
-    var newpage3 = document.createElement("div");
-    newpage3.id = "HoldsAboutStuff";
-    document.getElementById("AboutPage").appendChild(newpage3);
-    var home = document.createElement("button");
-    home.id = "veryhomey";
-    home.innerHTML = "Go Back to Home Page";
-    newpage3.appendChild(home);
+
     document.getElementById("homepage").style.display = "none";
-    document.getElementById("AbouttheCreatorButton").style.display = "none";
+    document.getElementById("SavedAdvicePage").style.display = "none";
+    document.getElementById("NewAdvicePage").style.display = "none";
+    document.getElementById("AboutPage").style.display = "";
+
+}
+
+function goHome(e){
+    e.preventDefault();
+
+    document.getElementById("homepage").style.display = "";
+    document.getElementById("SavedAdvicePage").style.display = "none";
+    document.getElementById("NewAdvicePage").style.display = "none";
+    document.getElementById("AboutPage").style.display = "none";
 }
 
