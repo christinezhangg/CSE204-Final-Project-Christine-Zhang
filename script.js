@@ -1,20 +1,36 @@
 document.getElementById("ViewSavedAdviceButton").addEventListener("click", savedAdvice);
 document.getElementById("NewAdviceButton").addEventListener("click", newAdvice);
 document.getElementById("AbouttheCreatorButton").addEventListener("click", goAbout);
-//document.getElementById("veryhomey").addEventListener("click", goHome);
 var url = "https://api.adviceslip.com/advice";
 var advice = [];
 
-function getAdvice(i) {
-    var xhttp1 = new XMLHttpRequest();
-    xhttp1.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var advice = JSON.parse(this.responseText);
-            newAdvice(advice);
-        }
-    };
-    xhttp1.open("GET", url, true);
-    xhttp1.send();
+// function getAdvice(i) {
+//     var xhttp1 = new XMLHttpRequest();
+//     xhttp1.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             var advice = JSON.parse(this.responseText);
+//             newAdvice(advice);
+//         }
+//     };
+//     xhttp1.open("GET", url, true);
+//     xhttp1.send();
+// }
+
+const API_URL = "https://api.adviceslip.com/advice";
+const quoteP = document.querySelector("h2#quote")
+
+function get(url) {
+    return fetch(url).then(resp => resp.json())
+}
+
+const API = { get }
+
+function getQuotes() {
+    API.get(API_URL).then(data => addQuote(data['slip']['advice']))
+}
+
+function addQuote(quote){
+    quoteP.innerText = quote;
 }
 
 function newAdvice(e){
